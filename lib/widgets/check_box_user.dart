@@ -15,7 +15,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // _checkbox = context.read<DataCubitChat>().getRememberMe;
+    _checkbox = context.read<DataCubitChat>().getRememberMe;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
