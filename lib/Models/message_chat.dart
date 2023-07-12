@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class MessageChat {
   String userEmail = '';
   String TextMessage = '';
@@ -11,6 +13,16 @@ class MessageChat {
       'TextMessage': TextMessage,
       'dataMessage': dataMessage
     };
+  }
+
+  factory MessageChat.fromDocSnapshot(DocumentSnapshot ds) {
+    String userEmail = ds['userEmail'];
+    String TextMessage = ds['TextMessage'];
+    Timestamp timestamp = ds['dataMessage'] as Timestamp;
+    DateTime dataMessage =
+        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+
+    return MessageChat(userEmail, TextMessage, dataMessage);
   }
 
   factory MessageChat.fromMap(Map<String, dynamic> map) {

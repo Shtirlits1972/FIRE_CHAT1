@@ -1,6 +1,7 @@
 import 'package:fire_chat/app_router.dart';
 import 'package:fire_chat/firebase_options.dart';
 import 'package:fire_chat/sqlite/crud.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -35,39 +36,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
+  void dispose() {
+    FirebaseAuth.instance.signOut();
+    print('Log Out');
+    super.dispose();
+  }
+
+  @override
   void initState() {
     Crud.init();
     super.initState();
   }
 }
-
-// void main() {
-//   runApp(App());
-// }
-
-// class App extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final AppRouter appRouter = AppRouter();
-//     return FutureBuilder(
-//       // Initialize FlutterFire
-//       future: Firebase.initializeApp(),
-//       builder: (context, snapshot) {
-//         // Check for errors
-//         if (snapshot.hasError) {
-//           print(snapshot.error.toString());
-//         }
-
-//         // Once complete, show your application
-//         if (snapshot.connectionState == ConnectionState.done) {
-//           print(ConnectionState.done.toString());
-//         }
-
-//         // Otherwise, show something whilst waiting for initialization to complete
-//         return SignInForm();
-//       },
-//     );
-//   }
-// }
-
-

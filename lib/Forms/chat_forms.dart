@@ -56,7 +56,6 @@ class _ChatFormsState extends State<ChatForms> {
             return const Center(child: CircularProgressIndicator());
           } else {
             // var items = snapshot.data?.docs ?? [];
-
             return Column(
               children: [
                 Expanded(
@@ -77,26 +76,12 @@ class _ChatFormsState extends State<ChatForms> {
                       }
 
                       DocumentSnapshot ds = snapshot.data!.docs[index];
-
-                      String userEmail = ds['userEmail'];
-
-                      String TextMessage = ds['TextMessage'];
-
-                      Timestamp timestamp = ds['dataMessage'] as Timestamp;
-
-                      DateTime dataMessage =
-                          DateTime.fromMillisecondsSinceEpoch(
-                              timestamp.millisecondsSinceEpoch);
-
-                      MessageChat messageChat =
-                          MessageChat(userEmail, TextMessage, dataMessage);
+                      MessageChat messageChat = MessageChat.fromDocSnapshot(ds);
 
                       if (ds['userEmail'] ==
                           context.read<DataCubitChat>().getUser.email) {
                         IsMay = true;
-                      }
-
-                      if (ds['userEmail'] ==
+                      } else if (ds['displayName'] ==
                           context.read<DataCubitChat>().getUser.displayName) {
                         IsMay = true;
                       }
